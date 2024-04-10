@@ -42,5 +42,19 @@ address_hash= results_hash.fetch("geometry")
 address_hash
 #geometry_hash=address_hash.fetch("geometry")
 location_hash=address_hash.fetch("location")
-pp location_hash.class
-pp location_hash
+location_hash.class
+ location_hash
+user_location_search="/"+location_hash.fetch("lat").to_s + "," + location_hash.fetch("lng").to_s
+
+#now time to get weather
+ pirate_weather_URL1= "https://api.pirateweather.net/forecast/" + pirate_weather_key + user_location_search
+raw_weather= HTTP.get(pirate_weather_URL1)
+parsed_weather = JSON.parse(raw_weather)
+parsed_weather
+pp pirate_weather_URL1
+
+#this is the output needed:
+#It is currently 46.58°F.
+#Next hour: Clear
+#In 12 hours, there is a 11% chance of precipitation.
+#You might want to take an umbrella!
