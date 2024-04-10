@@ -1,5 +1,7 @@
 require "http"
 require "json"
+require "time"
+
 
 #need user location
 #pp "Where are you located?"
@@ -50,8 +52,22 @@ user_location_search="/"+location_hash.fetch("lat").to_s + "," + location_hash.f
  pirate_weather_URL1= "https://api.pirateweather.net/forecast/" + pirate_weather_key + user_location_search
 raw_weather= HTTP.get(pirate_weather_URL1)
 parsed_weather = JSON.parse(raw_weather)
-parsed_weather
-pp pirate_weather_URL1
+pirate_weather_URL1
+
+parsed_weather.fetch("currently")
+current_weather_hash=parsed_weather.fetch("currently")
+current_temp=current_weather_hash.fetch("temperature")
+
+pp current_temp
+ time= Time.now.getlocal('-05:00')
+ time.zone
+ display_time= time.strftime("%I:%M")
+puts display_time 
+
+#next_hour_output
+#hourly_weather_fetch= parsed_weather.fetch("hourly")
+
+
 
 #this is the output needed:
 #It is currently 46.58°F.
